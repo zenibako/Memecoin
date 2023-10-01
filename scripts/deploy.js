@@ -1,14 +1,23 @@
 const hre = require("hardhat");
 
+async function deployCoin() {
+  const Bachelorcoin = await hre.ethers.getContractFactory("Bachelorcoin");
+  const bachelorcoin = await Bachelorcoin.deploy("Bachelorcoin", "BCOIN");
+  await bachelorcoin.deployed();
+  await bachelorcoin.addLiquidity();
+  console.log("Bachelorcoin deployed to:", bachelorcoin.address);
+}
+
+async function deployNft() {
+  const Bachelors = await hre.ethers.getContractFactory("Bachelors");
+  const bachelors = await Bachelors.deploy("Bachelors", "BNFT");
+  await bachelors.deployed();
+  console.log("Bachelors deployed to:", bachelors.address);
+}
+
 async function main() {
-  
-  const Meme = await hre.ethers.getContractFactory("Meme");
-  const meme = await Meme.deploy();
-  await meme.deployed();
-  await meme.addLiquidity();
-  console.log(
-    `Memecoin deployed to: ${meme.address}`
-  );
+  await deployCoin();
+  await deployNft();
 }
 
 main().catch((error) => {

@@ -31,7 +31,7 @@ interface INonfungiblePositionManager {
     ) external payable returns (address pool);
 }
 
-contract Meme is ERC20 {
+contract Bachelorcoin is ERC20 {
     INonfungiblePositionManager posMan = INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
     address constant weth = 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889; // polygon mumbai testnet
     //address constant weth = 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270; // Polygon wMatic
@@ -46,7 +46,7 @@ contract Meme is ERC20 {
     uint amount0Desired;
     uint amount1Desired;
     
-    constructor() ERC20("Meme Token", "MEME") {
+    constructor(string memory name, string memory symbol) ERC20(name, symbol) {
         _mint(address(this), supply);
         fixOrdering();
         pool = posMan.createAndInitializePoolIfNecessary(token0, token1, fee, sqrtPriceX96);
